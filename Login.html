@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Login-Register</title>
+    <link rel="stylesheet" href="../CSSforLoginPage/Login.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+  </head>
+  <body>
+    <main>
+      <div class="container" id="container">
+        <div class="form-container register">
+          <form action="../PHPforLoginPage/RonaLogin.php" method="post">
+            <h1>Register</h1>
+            <input type="text" placeholder="Username" id="usernameInput" name="username" required>
+            <label for="strengthLabel" id="strengthLabel"></label>
+            <!-- aria-describedBy(still on going) -->
+            <input type="password" placeholder="Password" id="passwordInput" name="password" aria-describedby="passwordDescription" required>
+            <div id="passwordDescription"></div>
+            <input type="password" placeholder="Confirm Password" id="confirmPasswordInput" required>
+            <label for="confirmPasswordLabel" id="confirmPasswordLabel"></label>
+            <input type="email" placeholder="Email Address" id="emailAddress" name="email" required>
+  
+            <button type="submit" name="register">Register</button>
+  
+            <span>Or Register with</span>
+  
+            <div class="social-icons">
+              <a href="#"><i class='bx bxl-facebook-square'></i></a>
+              <a href="#"><i class="bx bxl-instagram-alt"></i></a>
+              <a href="#"><i class="bx bxl-linkedin-square"></i></a>
+              <a href="#"><i class="bx bxl-github"></i></a>
+            </div>
+          </form>
+        </div>
+        <div class="form-container login">
+          <form id="loginForm" action="../PHPforLoginPage/RonaLogin.php" method="post">
+            <h1>Login</h1>
+        
+            <input type="text" placeholder="Username" name="username" id="loginUsernameInput" required>
+            <input type="password" placeholder="Password" id="loginPasswordInput" name="password" required>
+            <a href="#">Forgot Your Password?</a>
+            <button type="submit" id="loginButton" name="login">Login</button>
+            <div id="errorMessage" class="error-message"></div>
+        
+            <span>Or Login with</span>
+        
+            <div class="social-icons">
+              <a href="#"><i class="bx bxl-facebook-square"></i></a>
+              <a href="#"><i class="bx bxl-instagram-alt"></i></a>
+              <a href="#"><i class="bx bxl-linkedin-square"></i></a>
+              <a href="#"><i class="bx bxl-github"></i></a>
+            </div>
+          </form>
+        </div>        
+        <div class="toggle-container">
+          <div class="toggle">
+            <div class="toggle-panel left">
+              <h2>Already have an account?</h2>
+              <p>Come, and login now!</p>
+              <button class="hidden" id="login">Login</button>
+            </div>
+            <div class="toggle-panel right">
+              <h2>
+                Don't have an account?
+              </h2>
+              <p>
+                Create an account now!
+              </p>
+              <button class="hidden" id="register">Register</button>
+            </div>
+          </div>
+        </div>
+        <div class="modal" id="modal">
+          <div class="modal-content">
+            <p id="modal-message"></p>
+          </div>
+        </div>
+      </div>
+    </main>
+    <script src="../JSforLoginPage/Login.js"></script>
+  </body>
+</html>
