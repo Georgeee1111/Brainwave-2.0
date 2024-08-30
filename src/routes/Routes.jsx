@@ -5,7 +5,7 @@ import NotFound from "../components/generalComponents/NotFound";
 
 const RoutesComponent = () => {
   return (
-    <Router>
+    <Router basename="/Brainwave-2.0">
       <Routes>
         {homeRoutes.map((route, index) => (
           <Route key={index} path={route.path} element={route.element} />
