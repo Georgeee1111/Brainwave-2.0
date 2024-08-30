@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 
 export const headerNavigationPropType = PropTypes.arrayOf(
   PropTypes.shape({
-    id: PropTypes.string.isRequired,
+    id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
     url: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
     onlyMobile: PropTypes.bool,
