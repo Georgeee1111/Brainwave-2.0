@@ -1,4 +1,4 @@
-import { useLocation } from "react-router-dom";
+import { useLocation, Link } from "react-router-dom";
 import { disablePageScroll, enablePageScroll } from "scroll-lock";
 import { brainwave } from "../../assets";
 import Button from "./Button";
@@ -8,7 +8,7 @@ import { HamburgerMenu } from "../design/Header";
 import { headerNavigationPropType } from "../../assets/header/HeaderComponent";
 
 const Header = ({ navigation }) => {
-  const pathname = useLocation();
+  const location = useLocation();
   const [openNavigation, setOpenNavigation] = useState(false);
 
   const toggleNavigation = () => {
@@ -21,11 +21,18 @@ const Header = ({ navigation }) => {
     }
   };
 
-  const handleClick = () => {
-    if (!openNavigation) return;
+  const handleLinkClick = (event, targetId) => {
+    event.preventDefault(); // Prevent default link behavior
 
-    enablePageScroll();
-    setOpenNavigation(false);
+    if (openNavigation) {
+      enablePageScroll();
+      setOpenNavigation(false);
+    }
+
+    const target = document.getElementById(targetId);
+    if (target) {
+      target.scrollIntoView({ behavior: "smooth" }); // Smooth scroll to the target element
+    }
   };
 
   return (
@@ -43,9 +50,9 @@ const Header = ({ navigation }) => {
         }`}
       >
         <div className="flex items-center px-5 lg:px-7.5 xl:px-10 max-lg:py-4">
-          <a className="block w-[12rem] xl:mr-8" href="/home">
+          <Link className="block w-[12rem] xl:mr-8" to="/#home">
             <img src={brainwave} width={190} height={40} alt="Brainwave" />
-          </a>
+          </Link>
           <nav
             className={`${
               openNavigation ? "flex" : "hidden"
@@ -53,10 +60,10 @@ const Header = ({ navigation }) => {
           >
             <div className="relative z-2 flex flex-col items-center justify-center m-auto lg:flex-row">
               {navigation.map((item) => (
-                 <a
+                <Link
                   key={item.id}
-                  href={item.url}
-                  onClick={handleClick}
+                  to={item.url}
+                  onClick={(e) => handleLinkClick(e, item.url.split("#")[1])}
                   className={`block relative font-code text-2xl uppercase text-n-1 transition-colors hover:text-color-1 ${
                     item.onlyMobile ? "lg:hidden" : ""
                   } px-6 py-6 md:py-8 lg:-mr-0.25 lg:text-xs lg:font-semi-bold ${
@@ -66,36 +73,37 @@ const Header = ({ navigation }) => {
                   } lg:leading-5 lg:hover:text-n-1 xl:px-12`}
                 >
                   {item.title}
-                </a>
+                </Link>
               ))}
-              <a
-                href="/SignUp"
+              <Link
+                to="/#SignUp"
+                onClick={(e) => handleLinkClick(e, "SignUp")}
                 className={`block relative font-code text-2xl uppercase text-n-1 transition-colors hover:text-color-1 ${
                   openNavigation ? "" : "hidden"
                 } px-6 py-6 md:py-8 lg:-mr-0.25 lg:text-xs lg:font-semi-bold lg:leading-5 lg:hover:text-n-1 xl:px-12`}
-                onClick={handleClick}
               >
                 New Account
-              </a>
-              <a
-                href="/login"
+              </Link>
+              <Link
+                to="/#login"
+                onClick={(e) => handleLinkClick(e, "login")}
                 className={`block relative font-code text-2xl uppercase text-n-1 transition-colors hover:text-color-1 ${
                   openNavigation ? "" : "hidden"
                 } px-6 py-6 md:py-8 lg:-mr-0.25 lg:text-xs lg:font-semi-bold lg:leading-5 lg:hover:text-n-1 xl:px-12`}
-                onClick={handleClick}
               >
                 Sign in
-              </a>
+              </Link>
             </div>
             <HamburgerMenu />
           </nav>
 
-          <a
-            href="/SignUp"
+          <Link
+            to="/#SignUp"
             className="button hidden mr-8 text-n-1/50 transition-colors hover:text-n-1 lg:block"
+            onClick={(e) => handleLinkClick(e, "SignUp")}
           >
-            new Account
-          </a>
+            New Account
+          </Link>
           <Button to="/login" className="hidden lg:flex">
             Sign in
           </Button>
