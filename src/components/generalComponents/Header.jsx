@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { disablePageScroll, enablePageScroll } from "scroll-lock";
 import { brainwave } from "../../assets";
@@ -9,34 +8,17 @@ import { HamburgerMenu } from "../design/Header";
 import { headerNavigationPropType } from "../../assets/header/HeaderComponent";
 
 const Header = ({ navigation }) => {
-  const { hash } = useLocation();
+  const pathname = useLocation().hash;
   const [openNavigation, setOpenNavigation] = useState(false);
 
   const toggleNavigation = () => {
+    setOpenNavigation(!openNavigation);
     if (openNavigation) {
-      setOpenNavigation(false);
       enablePageScroll();
     } else {
-      setOpenNavigation(true);
       disablePageScroll();
     }
   };
-
-  const handleClick = () => {
-    if (!openNavigation) return;
-
-    enablePageScroll();
-    setOpenNavigation(false);
-  };
-
-  useEffect(() => {
-    if (hash) {
-      const element = document.getElementById(hash.replace("#", ""));
-      if (element) {
-        element.scrollIntoView({ behavior: "smooth" });
-      }
-    }
-  }, [hash]);
 
   return (
     <>
@@ -70,7 +52,9 @@ const Header = ({ navigation }) => {
                   className={`block relative font-code text-2xl uppercase text-n-1 transition-colors hover:text-color-1 ${
                     item.onlyMobile ? "lg:hidden" : ""
                   } px-6 py-6 md:py-8 lg:-mr-0.25 lg:text-xs lg:font-semi-bold ${
-                    item.url === hash ? "z-2 lg:text-n-1" : "lg:text-n-1/50"
+                    item.url === pathname
+                      ? "z-2 lg:text-n-1"
+                      : "lg:text-n-1/50"
                   } lg:leading-5 lg:hover:text-n-1 xl:px-12`}
                 >
                   {item.title}
