@@ -1,16 +1,15 @@
+import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { disablePageScroll, enablePageScroll } from "scroll-lock";
-
 import { brainwave } from "../../assets";
 import Button from "./Button";
 import MenuSvg from "../../assets/svg/MenuSvg";
 import { useState } from "react";
 import { HamburgerMenu } from "../design/Header";
 import { headerNavigationPropType } from "../../assets/header/HeaderComponent";
-import { Link } from "react-router-dom";
 
 const Header = ({ navigation }) => {
-  const pathname = useLocation();
+  const { hash } = useLocation();
   const [openNavigation, setOpenNavigation] = useState(false);
 
   const toggleNavigation = () => {
@@ -29,6 +28,15 @@ const Header = ({ navigation }) => {
     enablePageScroll();
     setOpenNavigation(false);
   };
+
+  useEffect(() => {
+    if (hash) {
+      const element = document.getElementById(hash.replace("#", ""));
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth" });
+      }
+    }
+  }, [hash]);
 
   return (
     <>
@@ -62,23 +70,21 @@ const Header = ({ navigation }) => {
                   className={`block relative font-code text-2xl uppercase text-n-1 transition-colors hover:text-color-1 ${
                     item.onlyMobile ? "lg:hidden" : ""
                   } px-6 py-6 md:py-8 lg:-mr-0.25 lg:text-xs lg:font-semi-bold ${
-                    item.url === pathname.hash
-                      ? "z-2 lg:text-n-1"
-                      : "lg:text-n-1/50"
+                    item.url === hash ? "z-2 lg:text-n-1" : "lg:text-n-1/50"
                   } lg:leading-5 lg:hover:text-n-1 xl:px-12`}
                 >
                   {item.title}
                 </a>
               ))}
-              <Link
-                to="#/signup" 
+              <a
+                href="/SignUp"
                 className={`block relative font-code text-2xl uppercase text-n-1 transition-colors hover:text-color-1 ${
                   openNavigation ? "" : "hidden"
                 } px-6 py-6 md:py-8 lg:-mr-0.25 lg:text-xs lg:font-semi-bold lg:leading-5 lg:hover:text-n-1 xl:px-12`}
                 onClick={handleClick}
               >
                 New Account
-              </Link>
+              </a>
               <a
                 href="/login"
                 className={`block relative font-code text-2xl uppercase text-n-1 transition-colors hover:text-color-1 ${
