@@ -11,7 +11,7 @@ const RoutesComponent = () => {
           <Route key={index} path={route.path} element={route.element} />
         ))}
         {/* Display not found page when the URL does not exist */}
-        
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </Router>
   );
