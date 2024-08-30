@@ -1,6 +1,7 @@
 {
   "name": "brainwave",
   "private": true,
+  "homepage": "https://georgeee1111.github.io/Brainwave-2.0/",
   "version": "0.0.0",
   "type": "module",
   "scripts": {
