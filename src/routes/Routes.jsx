@@ -5,7 +5,7 @@ import NotFound from "../components/generalComponents/NotFound";
 
 const RoutesComponent = () => {
   return (
-    <Router basename={process.env.PUBLIC_URL}>
+    <Router>
       <Routes>
         {homeRoutes.map((route, index) => (
           <Route key={index} {...route} />
