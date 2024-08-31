@@ -81,11 +81,13 @@ const LoginForm = () => {
                   Sign in
                 </Button>
               </div>
-              <div className="mt-4 flex justify-end">
-                Don't have an account?
+              <div className="mt-4 text-center flex flex-col sm:flex-row sm:items-center sm:justify-end sm:text-center">
+                <span className="text-center sm:text-left">
+                  Don't have an account?
+                </span>
                 <a
                   href="/SignUp"
-                  className="button hidden text-n-1/50 transition-colors hover:text-n-1 lg:block pl-[0.5rem] mt-[0.2rem]"
+                  className="text-n-1/50 transition-colors hover:text-n-1 mt-2 sm:mt-0 sm:ml-2"
                 >
                   Click here
                 </a>
