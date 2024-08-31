@@ -4,6 +4,23 @@ import Button from "../generalComponents/Button";
 import ButtonGradient from "../../assets/svg/ButtonGradient";
 import { useFormik } from "formik";
 import { SignupValidation } from "./SignupValidation";
+import { Link } from "react-router-dom";
+
+const handleLinkClick = (event, targetId) => {
+  const target = document.getElementById(targetId);
+
+  if (target) {
+    // If the target is found, it means we're trying to scroll within the same page.
+    event.preventDefault();
+    target.scrollIntoView({ behavior: "smooth" });
+
+    if (openNavigation) {
+      enablePageScroll();
+      setOpenNavigation(false);
+    }
+  }
+  // If the target is not found, we let the default behavior happen, which is navigation.
+};
 
 const initialValues = {
   email: "",
@@ -82,12 +99,13 @@ const SignUp = () => {
             <span className="text-center sm:text-left">
               Already have an account?
             </span>
-            <a
-              href="/login"
+            <Link
+              to="/login"
+              onClick={(e) => handleLinkClick(e, "login")}
               className="text-n-1/50 transition-colors hover:text-n-1 mt-2 sm:mt-0 sm:ml-2"
             >
               Click here
-            </a>
+            </Link>
           </div>
         </form>
       </Box>
