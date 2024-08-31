@@ -21,17 +21,25 @@ const Header = ({ navigation }) => {
     }
   };
 
-  const handleLinkClick = (event, targetId) => {
-    event.preventDefault(); // Prevent default link behavior
+  const handleLinkClick = (event, targetId, targetPath) => {
+    event.preventDefault();
+
+    // Check if we are already on the target page
+    if (location.pathname !== targetPath) {
+      // Navigate to the target page, and let the scroll action happen there
+      window.location.href = targetPath + "#" + targetId;
+      return;
+    }
+
+    // If we are on the target page, execute the smooth scroll
+    const target = document.getElementById(targetId);
+    if (target) {
+      target.scrollIntoView({ behavior: "smooth" });
+    }
 
     if (openNavigation) {
       enablePageScroll();
       setOpenNavigation(false);
-    }
-
-    const target = document.getElementById(targetId);
-    if (target) {
-      target.scrollIntoView({ behavior: "smooth" }); // Smooth scroll to the target element
     }
   };
 
