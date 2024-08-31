@@ -78,7 +78,7 @@ const Header = ({ navigation }) => {
                 </Link>
               ))}
               <Link
-                to="/#SignUp"
+                to="/SignUp"
                 onClick={(e) => handleLinkClick(e, "SignUp")}
                 className={`block relative font-code text-2xl uppercase text-n-1 transition-colors hover:text-color-1 ${
                   openNavigation ? "" : "hidden"
@@ -87,7 +87,7 @@ const Header = ({ navigation }) => {
                 New Account
               </Link>
               <Link
-                to="/#login"
+                to="/login"
                 onClick={(e) => handleLinkClick(e, "login")}
                 className={`block relative font-code text-2xl uppercase text-n-1 transition-colors hover:text-color-1 ${
                   openNavigation ? "" : "hidden"
@@ -100,7 +100,7 @@ const Header = ({ navigation }) => {
           </nav>
 
           <Link
-            to="/SignUp"
+            to="#SignUp"
             className="button hidden mr-8 text-n-1/50 transition-colors hover:text-n-1 lg:block"
           >
             New Account
