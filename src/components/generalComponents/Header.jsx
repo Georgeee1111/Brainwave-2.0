@@ -22,17 +22,19 @@ const Header = ({ navigation }) => {
   };
 
   const handleLinkClick = (event, targetId) => {
-    event.preventDefault(); // Prevent default link behavior
-
-    if (openNavigation) {
-      enablePageScroll();
-      setOpenNavigation(false);
-    }
-
     const target = document.getElementById(targetId);
+
     if (target) {
-      target.scrollIntoView({ behavior: "smooth" }); // Smooth scroll to the target element
+      // If the target is found, it means we're trying to scroll within the same page.
+      event.preventDefault();
+      target.scrollIntoView({ behavior: "smooth" });
+
+      if (openNavigation) {
+        enablePageScroll();
+        setOpenNavigation(false);
+      }
     }
+    // If the target is not found, we let the default behavior happen, which is navigation.
   };
 
   return (
@@ -98,9 +100,8 @@ const Header = ({ navigation }) => {
           </nav>
 
           <Link
-            to="/#SignUp"
+            to="/SignUp"
             className="button hidden mr-8 text-n-1/50 transition-colors hover:text-n-1 lg:block"
-            onClick={(e) => handleLinkClick(e, "SignUp")}
           >
             New Account
           </Link>
