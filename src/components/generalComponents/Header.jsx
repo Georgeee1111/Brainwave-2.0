@@ -23,20 +23,25 @@ const Header = ({ navigation }) => {
 
   const handleLinkClick = (event, targetId, targetPath) => {
     event.preventDefault();
-
-    // Check if we are already on the target page
+  
+    // Ensure targetPath is correctly defined
+    if (!targetPath) {
+      console.error("Target path is undefined for:", targetId);
+      return;
+    }
+  
+    // Navigate to the target page if the paths don't match
     if (location.pathname !== targetPath) {
-      // Navigate to the target page, and let the scroll action happen there
       window.location.href = targetPath + "#" + targetId;
       return;
     }
-
-    // If we are on the target page, execute the smooth scroll
+  
+    // Smooth scroll to the target element on the current page
     const target = document.getElementById(targetId);
     if (target) {
       target.scrollIntoView({ behavior: "smooth" });
     }
-
+  
     if (openNavigation) {
       enablePageScroll();
       setOpenNavigation(false);
@@ -84,8 +89,8 @@ const Header = ({ navigation }) => {
                 </Link>
               ))}
               <Link
-                to="/#SignUp"
-                onClick={(e) => handleLinkClick(e, "SignUp")}
+                to="/SignUp"
+                onClick={(e) => handleLinkClick(e, "SignUp", "/SignUp")}
                 className={`block relative font-code text-2xl uppercase text-n-1 transition-colors hover:text-color-1 ${
                   openNavigation ? "" : "hidden"
                 } px-6 py-6 md:py-8 lg:-mr-0.25 lg:text-xs lg:font-semi-bold lg:leading-5 lg:hover:text-n-1 xl:px-12`}
