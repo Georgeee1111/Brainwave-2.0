@@ -21,25 +21,17 @@ const Header = ({ navigation }) => {
     }
   };
 
-  const handleLinkClick = (event, targetId, targetPath) => {
-    event.preventDefault();
-
-    // Check if we are already on the target page
-    if (location.pathname !== targetPath) {
-      // Navigate to the target page, and let the scroll action happen there
-      window.location.href = targetPath + "#" + targetId;
-      return;
-    }
-
-    // If we are on the target page, execute the smooth scroll
-    const target = document.getElementById(targetId);
-    if (target) {
-      target.scrollIntoView({ behavior: "smooth" });
-    }
+  const handleLinkClick = (event, targetId) => {
+    event.preventDefault(); // Prevent default link behavior
 
     if (openNavigation) {
       enablePageScroll();
       setOpenNavigation(false);
+    }
+
+    const target = document.getElementById(targetId);
+    if (target) {
+      target.scrollIntoView({ behavior: "smooth" }); // Smooth scroll to the target element
     }
   };
 
@@ -84,7 +76,7 @@ const Header = ({ navigation }) => {
                 </Link>
               ))}
               <Link
-                to="/SignUp"
+                to="/#SignUp"
                 onClick={(e) => handleLinkClick(e, "SignUp")}
                 className={`block relative font-code text-2xl uppercase text-n-1 transition-colors hover:text-color-1 ${
                   openNavigation ? "" : "hidden"
@@ -93,7 +85,7 @@ const Header = ({ navigation }) => {
                 New Account
               </Link>
               <Link
-                to="/login"
+                to="/#login"
                 onClick={(e) => handleLinkClick(e, "login")}
                 className={`block relative font-code text-2xl uppercase text-n-1 transition-colors hover:text-color-1 ${
                   openNavigation ? "" : "hidden"
@@ -106,7 +98,7 @@ const Header = ({ navigation }) => {
           </nav>
 
           <Link
-            to="/SignUp"
+            to="/#SignUp"
             className="button hidden mr-8 text-n-1/50 transition-colors hover:text-n-1 lg:block"
             onClick={(e) => handleLinkClick(e, "SignUp")}
           >
